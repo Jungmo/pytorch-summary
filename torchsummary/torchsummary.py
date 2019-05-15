@@ -89,7 +89,7 @@ def summary(model, input_size, batch_size=-1, device="cuda"):
             str(summary[layer]["output_shape"]),
             "{0:,}".format(summary[layer]["nb_params"]),
         )
-        
+        ret.append(summary[layer]["output_shape"]) 
         print(line_new)
     ''' 
     # assume 4 bytes/number (float on cuda).
