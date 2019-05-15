@@ -110,4 +110,4 @@ def summary(model, input_size, batch_size=-1, device="cuda"):
     print("----------------------------------------------------------------")
     # return summary
     '''
-    return ret
+    return summary
