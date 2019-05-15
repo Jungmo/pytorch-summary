@@ -74,7 +74,7 @@ def summary(model, input_size, batch_size=-1, device="cuda"):
     # remove these hooks
     for h in hooks:
         h.remove()
-
+    ret = []
     print("----------------------------------------------------------------")
     line_new = "{:>20}  {:>25} {:>15}".format("Layer (type)", "Output Shape", "Param #")
     print(line_new)
@@ -89,13 +89,15 @@ def summary(model, input_size, batch_size=-1, device="cuda"):
             str(summary[layer]["output_shape"]),
             "{0:,}".format(summary[layer]["nb_params"]),
         )
+        
+        ret.append(summary[layer]["output_shape"])
         total_params += summary[layer]["nb_params"]
         total_output += np.prod(summary[layer]["output_shape"])
         if "trainable" in summary[layer]:
             if summary[layer]["trainable"] == True:
                 trainable_params += summary[layer]["nb_params"]
         print(line_new)
-
+    ''' 
     # assume 4 bytes/number (float on cuda).
     total_input_size = abs(np.prod(input_size) * batch_size * 4. / (1024 ** 2.))
     total_output_size = abs(2. * total_output * 4. / (1024 ** 2.))  # x2 for gradients
@@ -113,3 +115,5 @@ def summary(model, input_size, batch_size=-1, device="cuda"):
     print("Estimated Total Size (MB): %0.2f" % total_size)
     print("----------------------------------------------------------------")
     # return summary
+    '''
+    return ret
