@@ -90,12 +90,6 @@ def summary(model, input_size, batch_size=-1, device="cuda"):
             "{0:,}".format(summary[layer]["nb_params"]),
         )
         
-        ret.append(summary[layer]["output_shape"])
-        total_params += summary[layer]["nb_params"]
-        total_output += np.prod(summary[layer]["output_shape"])
-        if "trainable" in summary[layer]:
-            if summary[layer]["trainable"] == True:
-                trainable_params += summary[layer]["nb_params"]
         print(line_new)
     ''' 
     # assume 4 bytes/number (float on cuda).
